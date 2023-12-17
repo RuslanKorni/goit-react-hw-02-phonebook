@@ -29,15 +29,14 @@ class App extends Component {
     const normalizedName = name.toLowerCase();
 
     let isAdded = false;
-    this.state.contacts.forEach(el => {
+    this.state.contacts.some(el => {
       if (el.name.toLowerCase() === normalizedName) {
-        toast.error(`${name}: is already in contacts`, notifyOptions);
         isAdded = true;
       }
     });
 
     if (isAdded) {
-      return;
+      return toast.error(`${name}: is already in contacts`, notifyOptions);
     }
     const contact = {
       id: shortid.generate(),
